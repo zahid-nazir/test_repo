@@ -1,9 +1,9 @@
-name: My Test Workflow1
+name: My Test Workflow2
 
 on:
-  # workflow_dispatch:
-  push:
-    branches: [ master ]
+  workflow_dispatch:
+    push:
+      branches: [ master ]
 
 jobs:
   test:

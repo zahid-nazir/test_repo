@@ -25,5 +25,5 @@ jobs:
       with:
         github_token: ${{ secrets.GH_SECRET }}
         source_ref: ${{ github.ref }}
-        target_branch: 'test'
-        commit_message_template: ${{ env.commit_message }}
+        target_branch: ${{ github.event.inputs.environment == 'staging' && 'test' || 'prod' }}
+        commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'

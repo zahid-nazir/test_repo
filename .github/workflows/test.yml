@@ -1,6 +1,7 @@
-name: Test Workflow
+name: My Test Workflow
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
 
@@ -12,6 +13,6 @@ jobs:
       uses: actions/checkout@v2
     - name: Print message
       run: |
-        echo "Workflow executed successfully!"
+        echo "Workflow executed successfully on demand!"
         git --version
         ls -al

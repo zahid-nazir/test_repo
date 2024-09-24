@@ -1,5 +1,8 @@
 name: My Test Workflow2
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GH_SECRET }}
+
 on:
   workflow_dispatch:
     inputs:
@@ -23,7 +26,7 @@ jobs:
     - name: Auto Merge    
       uses: everlytic/branch-merge@1.1.2
       with:
-        github_token: ${{ secrets.GH_SECRET }}
+        github_token: ${{ env.GITHUB_TOKEN }}
         source_ref: ${{ github.ref }}
         target_branch: ${{ github.event.inputs.environment == 'staging' && 'test' || 'prod' }}
         commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'

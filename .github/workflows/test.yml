@@ -28,4 +28,4 @@ jobs:
         github_token: ${{ secrets.GH_SECRET }}
         source_ref: ${{ github.ref }}
         target_branch: 'test'
-        commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
+        commit_message_template: "[Automated][$(date +'%Y-%m-%dT%H:%M:%S')] Merged {source_ref} into target {target_branch}"

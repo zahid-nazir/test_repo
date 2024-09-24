@@ -7,8 +7,6 @@ on:
         description: 'Deployment environment (e.g., staging, production)'
         required: true
         default: 'staging'
-    push:
-      branches: [ master ]
 
 jobs:
   test:
@@ -22,9 +20,6 @@ jobs:
         echo "Deploying to the ${{github.event.inputs.environment}} environment"
         git --version
         ls -al
-    - name: Set commit message
-        id: commit_msg
-        run: echo "commit_message=[Automated] Merged ${{ github.ref }} into target test on $(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
     - name: Auto Merge    
       uses: everlytic/branch-merge@1.1.2
       with:

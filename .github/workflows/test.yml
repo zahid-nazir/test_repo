@@ -7,8 +7,6 @@ on:
         description: 'Deployment environment (e.g., staging, production)'
         required: true
         default: 'staging'
-    push:
-      branches: [ master ]
 
 jobs:
   test:
@@ -28,4 +26,4 @@ jobs:
         github_token: ${{ secrets.GH_SECRET }}
         source_ref: ${{ github.ref }}
         target_branch: 'test'
-        commit_message_template: '[Automated] Merged {source_ref} into target {target_branch} on $(date +"%Y-%m-%d %H:%M:%S")'
+        commit_message_template: ${{ env.commit_message }}

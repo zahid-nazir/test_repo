@@ -17,3 +17,10 @@ jobs:
         echo "using workflow dispatch event"
         git --version
         ls -al
+    - name: Auto Merge    
+      uses: everlytic/branch-merge@1.1.2
+      with:
+        github_token: ${{ secrets.GH_SECRET }}
+        source_ref: ${{ github.ref }}
+        target_branch: 'test'
+        commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'

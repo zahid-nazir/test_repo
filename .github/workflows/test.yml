@@ -22,10 +22,13 @@ jobs:
         echo "Deploying to the ${{github.event.inputs.environment}} environment"
         git --version
         ls -al
+    - name: Set commit message
+        id: commit_msg
+        run: echo "commit_message=[Automated] Merged ${{ github.ref }} into target test on $(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_ENV
     - name: Auto Merge    
       uses: everlytic/branch-merge@1.1.2
       with:
         github_token: ${{ secrets.GH_SECRET }}
         source_ref: ${{ github.ref }}
         target_branch: 'test'
-        commit_message_template: '[Automated] Merged {source_ref} into target {target_branch} on $(date +"%Y-%m-%d %H:%M:%S")'
+        commit_message_template: ${{ env.commit_message }}

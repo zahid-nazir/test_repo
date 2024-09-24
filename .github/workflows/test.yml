@@ -2,6 +2,11 @@ name: My Test Workflow2
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment (e.g., staging, production)'
+        required: true
+        default: 'staging'
     push:
       branches: [ master ]
 
@@ -14,7 +19,7 @@ jobs:
     - name: Print message
       run: |
         echo "Workflow executed successfully on demand"
-        echo "using workflow dispatch event"
+        echo "Deploying to the ${{github.event.inputs.environment}} environment"
         git --version
         ls -al
     - name: Auto Merge    

@@ -1,8 +1,5 @@
 name: My Test Workflow2
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GH_SECRET }}
-
 on:
   workflow_dispatch:
     inputs:
@@ -29,7 +26,9 @@ jobs:
           echo "Error: Invalid environment input. Must be 'staging' or 'production'."
           exit 1
         fi
-    - name: Auto Merge    
+    - name: Auto Merge   
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_SECRET }}
       uses: everlytic/branch-merge@1.1.2
       with:
         github_token: ${{ env.GITHUB_TOKEN }}

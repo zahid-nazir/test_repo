@@ -23,6 +23,12 @@ jobs:
         echo "Deploying to the ${{github.event.inputs.environment}} environment"
         git --version
         ls -al
+    - name: Validate Environment Input
+      run: |
+        if [[ "${{ github.event.inputs.environment }}" != "staging" && "${{ github.event.inputs.environment }}" != "production" ]]; then
+          echo "Error: Invalid environment input. Must be 'staging' or 'production'."
+          exit 1
+        fi
     - name: Auto Merge    
       uses: everlytic/branch-merge@1.1.2
       with:

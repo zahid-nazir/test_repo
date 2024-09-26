@@ -33,6 +33,6 @@ jobs:
       uses: everlytic/branch-merge@1.1.2
       with:
         github_token: ${{ env.GITHUB_TOKEN }}
-        source_ref: ${{ github.ref }}
-        target_branch: ${{ github.event.inputs.environment == 'staging' && 'test' || 'prod' }}
+        source_ref: ${{ github.event.inputs.environment == 'staging' && 'master' || 'test' }}
+        target_branch: ${{ github.event.inputs.environment == 'staging' && 'test' || 'production' }}
         commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'

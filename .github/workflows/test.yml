@@ -36,3 +36,10 @@ jobs:
         source_ref: ${{ github.event.inputs.environment == 'staging' && 'master' || 'test' }}
         target_branch: ${{ github.event.inputs.environment == 'staging' && 'test' || 'production' }}
         commit_message_template: '[Automated] Merged {source_ref} into target {target_branch}'
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_SECRET }}
+        script: whoami

@@ -44,5 +44,6 @@ jobs:
         key: ${{ secrets.SSH_SECRET }}
         script: |
           pwd
+          cd /var/www/html/
           ls -al
           whoami

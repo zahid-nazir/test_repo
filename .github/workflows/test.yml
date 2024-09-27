@@ -57,7 +57,10 @@ jobs:
       run: |
         # Set up SSH
         mkdir -p ~/.ssh
-        echo "${env.SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
+        echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${env.STAGING_USERNAME}@${env.STAGING_HOST} >> ~/.ssh/known_hosts
-        echo "test"
+        ssh-keyscan -H ${STAGING_USERNAME}@${STAGING_HOST} >> ~/.ssh/known_hosts
+        
+        # Change to your project directory and push to the staging server
+        git remote add staging $STAGING_USERNAME@$STAGING_HOST:/path/to/staging/repo
+        git push staging ${{ github.event.inputs.environment == 'staging' && 'staging-branch' || 'production-branch' }}:main

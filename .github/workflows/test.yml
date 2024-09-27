@@ -45,21 +45,14 @@ jobs:
         key: ${{ secrets.SSH_SECRET }}
         script: |
           pwd
-          cd /var/www/html/
           ls -al
           whoami
           echo "The PHP version is: $(php -v)"
           node -v
-    - name: Push Code to Staging Server
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-        SSH_HOST: ${{ secrets.SSH_HOST }}
-      run: |
-        # Set up SSH
-        mkdir -p ~/.ssh
-        echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H ${SSH_HOST} >> ~/.ssh/known_hosts
-        cd /var/www/html/mytestcopy
-        git remote -v
+          # Set up SSH
+          mkdir -p ~/.ssh
+          echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${SSH_HOST} >> ~/.ssh/known_hosts
+          cd /var/www/html/mytestcopy
+          git remote -v

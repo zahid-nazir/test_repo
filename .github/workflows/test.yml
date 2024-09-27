@@ -57,7 +57,7 @@ jobs:
       run: |
         # Set up SSH
         mkdir -p ~/.ssh
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        echo "${env.SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H $STAGING_USERNAME@$STAGING_HOST >> ~/.ssh/known_hosts
+        ssh-keyscan -H ${env.STAGING_USERNAME}@${env.STAGING_HOST} >> ~/.ssh/known_hosts
         echo "test"

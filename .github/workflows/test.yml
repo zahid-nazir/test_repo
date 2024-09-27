@@ -60,7 +60,4 @@ jobs:
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H $STAGING_USERNAME@$STAGING_HOST >> ~/.ssh/known_hosts
-
-        # Change to your project directory and push to the staging server
-        git remote add staging $STAGING_USERNAME@$STAGING_HOST:/var/www/html/mytestcopy
-        git push staging ${{ github.event.inputs.environment == 'staging' && 'test' || 'production' }}:main
+        echo "test"

@@ -49,3 +49,18 @@ jobs:
           echo 'Random sample text' > test3.txt
           echo "The PHP version is: $(php -v)"
           node -v
+    - name: Push Code to Staging Server
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+        SSH_HOST: ${{ secrets.SSH_HOST }}
+      run: |
+        # Set up SSH
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H $STAGING_HOST >> ~/.ssh/known_hosts
+
+        # Change to your project directory and push to the staging server
+        git remote add staging $STAGING_USERNAME@$STAGING_HOST:/var/www/html/mytestcopy
+        git push staging ${{ github.event.inputs.environment == 'staging' && 'test' || 'production' }}:main

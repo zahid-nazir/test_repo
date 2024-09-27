@@ -50,10 +50,6 @@ jobs:
           echo "The PHP version is: $(php -v)"
           node -v
           # Set up SSH
-          mkdir -p ~/.ssh
-          echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{secrets.SSH_HOST}} >> ~/.ssh/known_hosts
           cd /var/www/html/mytestcopy
           git remote -v
           git pull origin ${{ github.event.inputs.environment == 'staging' && 'test' || 'prod' }}

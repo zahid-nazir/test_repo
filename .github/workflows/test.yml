@@ -63,4 +63,4 @@ jobs:
         
         # Change to your project directory and push to the staging server
         git remote add staging ${SSH_USERNAME}@${SSH_HOST}:/var/www/html/mytestcopy
-        git push staging ${{ github.event.inputs.environment == 'staging' && 'staging-branch' || 'production-branch' }}:main
+        git push staging ${{ github.event.inputs.environment == 'staging' && 'test' || 'production' }}:main

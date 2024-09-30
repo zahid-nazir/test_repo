@@ -53,7 +53,7 @@ jobs:
           ssh-keyscan -H ${{secrets.SSH_HOST}} >> ~/.ssh/known_hosts
           cd /var/www/html/ievince_qnc2
           php artisan -V
-          composer install
+          composer install --no-interaction
           php artisan migrate --path="database/migrations"
           cd /var/www/html/mytestcopy
           git remote -v

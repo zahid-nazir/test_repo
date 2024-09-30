@@ -51,6 +51,10 @@ jobs:
           DIRECTORY="/var/www/html/test_dir"
           if [ ! -d "$DIRECTORY" ]; then
             sudo mkdir -p "$DIRECTORY"
+            sudo chmod -R 777 "$DIRECTORY"
+            cd "$DIRECTORY"
+            git init
+            git remote add origin https://github.com/ievince/cms.git
             echo "Directory created: $DIRECTORY"
           else
             echo "Directory already exists: $DIRECTORY"

@@ -51,7 +51,7 @@ jobs:
           node -v
           # Set up SSH
           ssh-keyscan -H ${{secrets.SSH_HOST}} >> ~/.ssh/known_hosts
-          cd /var/www/html/ievince_qnc
+          cd /var/www/html/ievince_qnc2
           php artisan -V
           php artisan migrate --path="database/migrations"
           cd /var/www/html/mytestcopy

@@ -56,6 +56,7 @@ jobs:
             git init
             git config --global --add safe.directory /var/www/html/test_dir
             git remote add origin https://github.com/ievince/cms.git
+            git checkout -b test
             echo "Directory created: $DIRECTORY"
           else
             echo "Directory already exists: $DIRECTORY"

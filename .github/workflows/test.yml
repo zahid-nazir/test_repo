@@ -51,6 +51,8 @@ jobs:
           node -v
           # Set up SSH
           ssh-keyscan -H ${{secrets.SSH_HOST}} >> ~/.ssh/known_hosts
+          cd /var/www/html/ievince_qnc
+          php artisan -V
           cd /var/www/html/mytestcopy
           git remote -v
           git pull origin ${{ github.event.inputs.environment == 'staging' && 'test' || 'prod' }}

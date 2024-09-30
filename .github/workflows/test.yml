@@ -7,6 +7,10 @@ on:
         description: 'Deployment environment (e.g., staging, production)'
         required: true
         default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
 
 jobs:
   test:

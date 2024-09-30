@@ -50,7 +50,7 @@ jobs:
         script: |
           DIRECTORY="/var/www/html/test_dir"
           if [ ! -d "$DIRECTORY" ]; then
-            mkdir -p "$DIRECTORY"
+            sudo mkdir -p "$DIRECTORY"
             echo "Directory created: $DIRECTORY"
           else
             echo "Directory already exists: $DIRECTORY"

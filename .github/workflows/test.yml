@@ -53,7 +53,7 @@ jobs:
           ssh-keyscan -H ${{secrets.SSH_HOST}} >> ~/.ssh/known_hosts
           cd /var/www/html/ievince_qnc
           php artisan -V
-          php artisan migrate
+          php artisan migrate --path="database/migrations"
           cd /var/www/html/mytestcopy
           git remote -v
           git pull origin ${{ github.event.inputs.environment == 'staging' && 'test' || 'prod' }}

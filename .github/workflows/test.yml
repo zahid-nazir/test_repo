@@ -54,6 +54,7 @@ jobs:
             sudo chmod -R 777 "$DIRECTORY"
             cd "$DIRECTORY"
             git init
+            git config --global --add safe.directory /var/www/html/test_dir
             git remote add origin https://github.com/ievince/cms.git
             echo "Directory created: $DIRECTORY"
           else

@@ -50,6 +50,7 @@ jobs:
         script: |
           DIRECTORY="/var/www/html/test_dir"
           if [ ! -d "$DIRECTORY" ]; then
+            mysql -e "CREATE DATABASE IF NOT EXISTS ${{secrets.DB_DATABASE}};" -u ${{secrets.DB_USERNAME}} -p ${{secrets.DB_PASSWORD}}
             sudo mkdir -p "$DIRECTORY"
             sudo chmod -R 777 "$DIRECTORY"
             cd "$DIRECTORY"
@@ -58,20 +59,9 @@ jobs:
             git remote add origin https://github.com/ievince/cms.git
             git checkout -b test
             echo "Directory created: $DIRECTORY"
-          else
-            echo "Directory already exists: $DIRECTORY"
           fi
-          pwd
-          ls -al
-          whoami
-          echo "The PHP version is: $(php -v)"
-          node -v
           # Set up SSH
           ssh-keyscan -H ${{secrets.SSH_HOST}} >> ~/.ssh/known_hosts
-          cd /var/www/html/ievince_qnc2
-          php artisan -V
-          composer install --no-interaction
-          php artisan migrate --path="database/migrations"
-          cd /var/www/html/mytestcopy
+          cd "$DIRECTORY"
           git remote -v
           git pull origin ${{ github.event.inputs.environment == 'staging' && 'test' || 'prod' }}
